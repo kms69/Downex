@@ -1,6 +1,5 @@
-[README_public (1).md](https://github.com/user-attachments/files/34538413/README_public.1.md)
 <p align="center">
-  <img src="Branding/DownexMark.png" alt="Downex" width="120">
+  <img src="logo.png" alt="Downex" width="120">
 </p>
 
 <h1 align="center">Downex Download Manager</h1>
