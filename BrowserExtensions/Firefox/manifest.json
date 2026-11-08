@@ -1,0 +1,56 @@
+{
+  "manifest_version": 2,
+  "name": "Downex (Firefox)",
+  "version": "1.0.0",
+  "description": "Integrate downloads with Downex for faster, multi-threaded downloads",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "rapid_download_manager@firefox",
+      "strict_min_version": "115.0"
+    }
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "downloads",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

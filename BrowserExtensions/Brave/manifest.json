@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Downex",
+  "version": "1.0.0",
+  "description": "Integrate downloads with Downex for faster, multi-threaded downloads",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk5uyscO3Kv0whD3PaSqrZcEVjNgPhJu+KceAniSMJIo8acg648Kna0NETzHqOSF2sGnK2K+UrOG1yIUPhxLEQK2F6OZ7iaBpqh6WTO0jKljT3W6oHwLClP9YMxy5OuGU40SSpu5M/gZ+7YK1nJjLM0XmQFpcQhbVm8afPxZs7MF5jRGnQ82oFa1kM9VY5JT+eyUbB7thRbgyzkNcPSMB7GG/JkOjTkBCIjzcPh0njbnFsFsr2aB0+VfTpwOArGXdG3RHLxY5wgrxiU1EGjkseWApf8wG+CJPQK4QzEZkp8vPxsQpyWER4GDICxqr6tiGpb8KdRXDg1D0TUplF4O1LwIDAQAB",
+  "permissions": [
+    "downloads",
+    "nativeMessaging",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "cookies"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "minimum_chrome_version": "102"
+}
