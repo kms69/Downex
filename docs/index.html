@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downex — Native macOS Download Manager</title>
+  <meta name="description" content="High-performance, lightweight native download manager for macOS with multi-threaded segment queues and seamless browser integration." />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: rgba(22, 27, 34, 0.7);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #38bdf8;
+      --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      --text: #f0f6fc;
+      --text-muted: #8b949e;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo-badge {
+      font-size: 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .hero {
+      padding: 96px 0 64px;
+      text-align: center;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.035em;
+    }
+    .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 36px;
+    }
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #0d1117;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(56, 189, 248, 0.4);
+    }
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .features { padding: 64px 0 96px; }
+    .section-title { text-align: center; margin-bottom: 48px; }
+    .section-title h2 { font-size: 2rem; margin-bottom: 8px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+    .card-icon { font-size: 1.8rem; margin-bottom: 16px; }
+    .card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--text); }
+    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">Downex <span class="logo-badge">macOS</span></a>
+      <div class="nav-links">
+        <a href="https://github.com/kms69/Downex" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero container">
+      <div class="badge-pill">⚡ Built for macOS Apple Silicon & Intel</div>
+      <h1>Accelerate your workflow with <span class="gradient-text">Downex</span></h1>
+      <p class="subtitle">A lightweight, native macOS download manager engineered for maximum throughput, segment queue control, and seamless browser capture.</p>
+      <div class="cta-group">
+        <a href="https://github.com/kms69/Downex/releases/latest" class="btn btn-primary" target="_blank" rel="noopener">Download Latest Release</a>
+        <a href="https://github.com/kms69/Downex" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </section>
+    <section class="features container">
+      <div class="section-title">
+        <h2>Engineered for Power & Simplicity</h2>
+        <p style="color: var(--text-muted);">Everything you need without the bloatware.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Multi-Threaded Acceleration</h3>
+          <p>Splits downloads into concurrent dynamic segments to saturate your bandwidth and bypass server throttling.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧩</div>
+          <h3>Universal Browser Extensions</h3>
+          <p>Seamlessly intercept downloads from Chrome, Brave, Firefox, Edge, and Safari with one-click handoff.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍎</div>
+          <h3>Native macOS UI</h3>
+          <p>Written natively for macOS with low CPU/RAM overhead, responsive dark mode support, and dynamic Dock status badges.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔄</div>
+          <h3>Intelligent Resume</h3>
+          <p>Auto-reconnects and safely resumes interrupted downloads without data corruption or re-downloading segments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Queue & Batch Manager</h3>
+          <p>Organize transfers with priority queues, configurable concurrent active limits, and post-task actions.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Privacy-First & Open</h3>
+          <p>No tracking, no telemetry injects, and zero bundled third-party adware. Pure, auditable open source code.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p>Released under the open-source license. Downex is maintained by <a href="https://github.com/kms69" style="color:var(--text); text-decoration:none;">kms69</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>
