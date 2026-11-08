@@ -11,6 +11,22 @@
 
 ---
 
+<p align="center">
+  <img src="screenshots/main-window.png" alt="Main window" width="100%"><br>
+  <sub>Library, queues and live transfer status</sub>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="screenshots/download-status.png" alt="Download status"><br><sub>Live status, progress and resume for each download</sub></td>
+    <td align="center" width="50%"><img src="screenshots/speed-limiter.png" alt="Speed limiter"><br><sub>Per-download speed limiter, changed live</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="screenshots/after-download.png" alt="After download options"><br><sub>What happens when a download finishes</sub></td>
+    <td align="center" width="50%"><img src="screenshots/scheduler.png" alt="Scheduler"><br><sub>Scheduler: start and stop times, sleep or shut down when done</sub></td>
+  </tr>
+</table>
+
 ## What it downloads
 
 - **Videos from popular sites:** YouTube (including Shorts and live), Instagram, TikTok, Facebook, X / Twitter, Vimeo, Dailymotion, Twitch and any other site [yt-dlp](https://github.com/yt-dlp/yt-dlp) supports.

@@ -1,0 +1,7 @@
+Copyright (c) 2026 Kaveh. All rights reserved.
+
+Downex Download Manager is free to use for personal purposes.
+You may not redistribute, resell, or modify the application or any of its files
+without written permission.
+
+The software is provided "as is", without warranty of any kind.
