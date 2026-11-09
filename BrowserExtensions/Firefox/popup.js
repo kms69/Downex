@@ -1,4 +1,4 @@
-// Downex - Popup Script
+// Downix - Popup Script
 
 let settings = {
   enabled: true,
