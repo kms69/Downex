@@ -1,4 +1,4 @@
-// Downex - Background script (Chrome/Edge MV3 service worker,
+// Downix - Background script (Chrome/Edge MV3 service worker,
 // also loaded as a Firefox MV2 background script).
 //
 // Responsibilities
@@ -390,12 +390,12 @@ async function captureBrowserDownload(item) {
         chrome.downloads.erase({ id: item.id }, () => { void chrome.runtime.lastError; });
       });
     }
-    notify('Download Captured', (basename(item.filename) || basename(new URL(url).pathname) || 'File') + ' sent to Downex');
+    notify('Download Captured', (basename(item.filename) || basename(new URL(url).pathname) || 'File') + ' sent to Downix');
   } else {
     // Failure path: leave the browser download untouched so nothing is lost.
     console.error('[RDM] App did not accept download, browser keeps it:', result.error);
     if (result.transport) {
-      notify('Downex not reachable',
+      notify('Downix not reachable',
         'The browser is downloading this file itself. Open the app and run Browser Integration > Install Native Host. (' + result.error + ')');
     }
   }
@@ -647,7 +647,7 @@ async function sendMediaItem(item, tab) {
     bumpStats('captured');
     notify('Download Started', title || item.url);
   } else {
-    notify('Could not send to Downex', result.error || 'Unknown error');
+    notify('Could not send to Downix', result.error || 'Unknown error');
   }
   return result;
 }
@@ -737,9 +737,9 @@ function createContextMenus() {
   chrome.contextMenus.removeAll(() => {
     void chrome.runtime.lastError;
     const make = (props) => chrome.contextMenus.create(props, () => { void chrome.runtime.lastError; });
-    make({ id: 'rdmLink', title: 'Download with Downex', contexts: ['link'] });
-    make({ id: 'rdmMedia', title: 'Download Video/Audio with Downex', contexts: ['video', 'audio'] });
-    make({ id: 'rdmPage', title: 'Grab video from this page with Downex', contexts: ['page'] });
+    make({ id: 'rdmLink', title: 'Download with Downix', contexts: ['link'] });
+    make({ id: 'rdmMedia', title: 'Download Video/Audio with Downix', contexts: ['video', 'audio'] });
+    make({ id: 'rdmPage', title: 'Grab video from this page with Downix', contexts: ['page'] });
   });
 }
 
@@ -754,7 +754,7 @@ if (chrome.contextMenus && chrome.contextMenus.onClicked) {
         filename: basename(decodeURIComponentSafe(new URL(info.linkUrl).pathname)) || null,
         referer: tab.url || null,
         kind: 'file'
-      }).then((r) => { if (!r.ok) notify('Could not send to Downex', r.error); });
+      }).then((r) => { if (!r.ok) notify('Could not send to Downix', r.error); });
     } else if (info.menuItemId === 'rdmMedia') {
       pickBestForTab(tab, info.srcUrl).then((item) => item && sendMediaItem(item, tab));
     } else if (info.menuItemId === 'rdmPage' && isHttpUrl(tab.url)) {
