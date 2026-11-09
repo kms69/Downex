@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Downex",
+  "name": "Downix",
   "version": "1.0.0",
-  "description": "Integrate downloads with Downex for faster, multi-threaded downloads",
+  "description": "Integrate downloads with Downix for faster, multi-threaded downloads",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk5uyscO3Kv0whD3PaSqrZcEVjNgPhJu+KceAniSMJIo8acg648Kna0NETzHqOSF2sGnK2K+UrOG1yIUPhxLEQK2F6OZ7iaBpqh6WTO0jKljT3W6oHwLClP9YMxy5OuGU40SSpu5M/gZ+7YK1nJjLM0XmQFpcQhbVm8afPxZs7MF5jRGnQ82oFa1kM9VY5JT+eyUbB7thRbgyzkNcPSMB7GG/JkOjTkBCIjzcPh0njbnFsFsr2aB0+VfTpwOArGXdG3RHLxY5wgrxiU1EGjkseWApf8wG+CJPQK4QzEZkp8vPxsQpyWER4GDICxqr6tiGpb8KdRXDg1D0TUplF4O1LwIDAQAB",
   "permissions": [
     "downloads",
