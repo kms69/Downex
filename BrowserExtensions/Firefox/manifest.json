@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Downex (Firefox)",
+  "name": "Downix (Firefox)",
   "version": "1.0.0",
-  "description": "Integrate downloads with Downex for faster, multi-threaded downloads",
+  "description": "Integrate downloads with Downix for faster, multi-threaded downloads",
   "browser_specific_settings": {
     "gecko": {
       "id": "rapid_download_manager@firefox",
