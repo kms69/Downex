@@ -46,6 +46,12 @@ h1 span{background:linear-gradient(90deg,var(--teal),var(--em) 40%,var(--indigo)
 .btn.primary:hover{filter:brightness(1.08)}
 .note{color:var(--muted);font-size:14px}
 
+.brew{max-width:560px;margin:22px auto 0;text-align:left;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.brew .lbl{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-bottom:8px}
+.brew button{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:4px 12px;font:600 12px inherit;cursor:pointer}
+.brew button:hover{border-color:#34406a}
+.brew pre{margin:0;white-space:pre-wrap;word-break:break-all}
+
 .shot-main{margin:40px auto 0;max-width:940px}
 .shot-main img{width:100%;display:block;border-radius:14px;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03)}
 
@@ -110,6 +116,12 @@ footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin
     <a class="btn" href="https://github.com/kms69/Downix">View on GitHub</a>
   </div>
   <p class="note">macOS 13 or later · Free</p>
+  <div class="brew">
+    <div class="lbl"><span>Or install with Homebrew</span><button type="button" id="copybrew">Copy</button></div>
+<pre id="brewcmd">brew tap kms69/downix
+brew trust kms69/downix
+brew install --cask downix</pre>
+  </div>
   <div class="shot-main"><img src="screenshots/main-window.png" alt="Downix main window"></div>
 </header>
 
@@ -142,6 +154,7 @@ footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin
   <p class="sub">Downix is not yet notarized by Apple, so macOS shows a warning the first time. It is safe to open.</p>
   <div class="steps">
     <div class="step"><h3>Download</h3><p>Get <code>Downix.dmg</code> from the <a href="https://github.com/kms69/Downix/releases/latest">latest release</a> and drag Downix into Applications.</p></div>
+    <div class="step"><h3>Or use Homebrew</h3><p>Run <code>brew tap kms69/downix</code>, <code>brew trust kms69/downix</code>, then <code>brew install --cask downix</code>.</p></div>
     <div class="step"><h3>Open it</h3><p>If macOS blocks it, go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. Or run:<pre>xattr -dr com.apple.quarantine /Applications/Downix.app</pre></p></div>
     <div class="step"><h3>Add the extension</h3><p>Download the extensions zip from the release, then load the folder for your browser from its extensions page (Developer mode → Load unpacked).</p></div>
   </div>
@@ -160,5 +173,12 @@ footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin
 </footer>
 
 </div>
+<script>
+document.getElementById('copybrew').addEventListener('click',function(){
+  var b=this,t=document.getElementById('brewcmd').textContent;
+  var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){})}
+});
+</script>
 </body>
 </html>
