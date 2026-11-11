@@ -46,6 +46,20 @@
 - **Live progress** in the Dock icon (progress bar and speed) and the menu bar.
 - **Check for Updates** from the About tab or the menu-bar menu.
 
+  ### Install with Homebrew
+
+```bash
+brew tap kms69/downix
+brew trust kms69/downix
+brew install --cask downix
+```
+
+Update later with `brew upgrade --cask downix`. Homebrew asks you to trust third-party taps, which is why the `brew trust` step is needed.
+
+### Install manually
+
+Download the `.dmg` from the [Releases page](https://github.com/kms69/Downix/releases) and drag Downix into Applications.
+
 ## Download
 
 1. Go to [**Releases**](https://github.com/kms69/Downix/releases/latest) and download `Downix-x.y.z.dmg`.
